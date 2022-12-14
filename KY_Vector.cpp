@@ -91,3 +91,21 @@ int KYVector<T>::push_back(T n) {
     vec[size - 1] = n;
     return size;
 }
+Temp
+void KYVector<T>::erase(iterator it) {
+    try {
+        KYVector<T> other;
+        for (int i = 0; i < size; ++i) {
+            if (&vec[i] != it) {
+                other.push_back(vec[i]);
+            }
+        }
+        if (size == other.size)
+            throw 1;
+        vec = other.vec;
+        other.vec = nullptr;
+    }
+    catch (int & x ){
+        cout << "ITERATOR NOT FOUND!\nERROR NO." << x << endl ;
+    }
+}
