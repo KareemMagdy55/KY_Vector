@@ -22,5 +22,10 @@ public:
     KYVector &operator=(const KYVector&);  // Copy assignment
     KYVector &operator=(const KYVector&&); // Move assignment
 
+    // Access operations
+    T& operator[](int);
 
+    // Modifying operations
+    T pop_back();
+    int push_back(T);
 };

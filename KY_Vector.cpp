@@ -61,3 +61,33 @@ KYVector<T> &KYVector<T>::operator=(const KYVector<T> && anotherVec) {
     }
     return *this ;
 }
+Temp
+T &KYVector<T>::operator[](int n ) {
+    try {
+        if (n >= size or n < 0) {
+            throw 0;
+        } else
+            return vec[n];
+    }
+    catch(int& x) {
+        cout << "INDEX NOT FOUND!\nERROR NO."  ;
+        return x;
+    }
+}
+Temp
+T KYVector<T>::pop_back() {
+    T lastElement = vec[size-1];
+    vec[size-1] = NULL;
+    --size;
+    --cap;
+    return lastElement;
+}
+Temp
+int KYVector<T>::push_back(T n) {
+    if ( size + 1 > cap){
+        cap ++ ;
+    }
+    size ++ ;
+    vec[size - 1] = n;
+    return size;
+}
