@@ -37,3 +37,27 @@ KYVector<T>::~KYVector() {
     cap = 0 ;
     vec = nullptr;
 }
+Temp
+KYVector<T> &KYVector<T>::operator=(const KYVector<T> & anotherVec) {
+    size = anotherVec.size;
+    cap = anotherVec.cap;
+
+    vec = new T[cap];
+
+    for (int i = 0; i < size; ++i) {
+        vec[i] = anotherVec.vec[i];
+    }
+}
+Temp
+KYVector<T> &KYVector<T>::operator=(const KYVector<T> && anotherVec) {
+    if ( this != &anotherVec) {
+        size = anotherVec.size;
+        cap = anotherVec.cap;
+        vec = anotherVec.vec;
+
+        anotherVec.size = 0 ;
+        anotherVec.cap = 0 ;
+        delete[] anotherVec.vec;
+    }
+    return *this ;
+}

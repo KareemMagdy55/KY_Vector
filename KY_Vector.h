@@ -18,4 +18,9 @@ public:
     // destructor
     ~KYVector();
 
+    // copy assignment and move assignment
+    KYVector &operator=(const KYVector&);  // Copy assignment
+    KYVector &operator=(const KYVector&&); // Move assignment
+
+
 };
