@@ -75,6 +75,7 @@ T &KYVector<T>::operator[](int n ) {
     }
 }
 Temp
+
 T KYVector<T>::pop_back() {
     T lastElement = vec[size-1];
     vec[size-1] = NULL;
@@ -131,3 +132,35 @@ void KYVector<T>::erase(KYVector::iterator it1, KYVector::iterator it2) {
         cout << "NOT VALID INTERVAL!\nERROR NO." << x << endl ;
     }
 }
+Temp
+void KYVector<T>::clear() {
+    size = 0 ;
+    cap = 0 ;
+    vec = new T[cap];
+}
+Temp
+void KYVector<T>::insert(KYVector::iterator it , T n) {
+    try {
+        KYVector<T> other(size + 1);
+        bool flag = false ;
+        if (it < this->begin() || it > this->end())
+            throw 3;
+
+        for (int i = 0; i < size ; ++i) {
+            if ( it == &vec[i] && !flag) {
+                other.push_back(n);
+                --i;
+                flag = true;
+                continue;
+            }
+                other.push_back(vec[i]);
+        }
+        vec = other.vec;
+        other.vec = nullptr;
+    }
+    catch (int & x ){
+       cout << "ITERATOR NOT FOUND!\nERROR NO." << x << endl;
+    }
+}
+
+
