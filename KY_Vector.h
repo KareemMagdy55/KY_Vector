@@ -39,6 +39,10 @@ public:
     iterator begin() { return &vec[0] ;}
     iterator end() { return &vec[size] ;}
 
+    // Comparison operations.
+    bool operator==(const KYVector<T>&);
+    bool operator< (const KYVector<T>&);
+    bool operator> (const KYVector<T>&);
 
     // Friends
     friend ostream& operator << (ostream& out, KYVector<T> kyVec) {

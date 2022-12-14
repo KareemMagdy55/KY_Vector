@@ -66,8 +66,9 @@ T &KYVector<T>::operator[](int n ) {
     try {
         if (n >= size or n < 0) {
             throw 0;
-        } else
+        } else {
             return vec[n];
+        }
     }
     catch(int& x) {
         cout << "INDEX NOT FOUND!\nERROR NO."  ;
@@ -162,5 +163,51 @@ void KYVector<T>::insert(KYVector::iterator it , T n) {
        cout << "ITERATOR NOT FOUND!\nERROR NO." << x << endl;
     }
 }
+Temp
+bool KYVector<T>::operator==(const KYVector<T> & kyVector) {
+    if (size != kyVector.size)
+        return false;
 
+    else {
+        for (int i = 0; i < size; ++i) {
+            if (vec[i] != kyVector.vec[i])
+                return false;
+        }
+        return true;
 
+    }
+}
+Temp
+bool KYVector<T>::operator>(const KYVector<T> & kyVector) {
+    if (*this == kyVector)
+        return false;
+
+    if (size != kyVector.size)
+        return false;
+
+    else {
+        for (int i = 0; i < size; ++i) {
+            if (vec[i] < kyVector.vec[i])
+                return false;
+        }
+        return true;
+
+    }
+}
+Temp
+bool KYVector<T>::operator<(const KYVector<T> & kyVector) {
+    if ( *this == kyVector)
+        return false;
+
+    if ( size != kyVector.size)
+        return false;
+
+    else {
+        for (int i = 0; i < size; ++i) {
+            if (vec[i] > kyVector.vec[i])
+                return false;
+        }
+        return true;
+
+    }
+}
