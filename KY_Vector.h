@@ -44,6 +44,13 @@ public:
     bool operator< (const KYVector<T>&);
     bool operator> (const KYVector<T>&);
 
+
+    // Capacity operations
+    int Size() const;     // Return current size of vec
+    int capacity() const; // Return size of current allocated array
+    void resize() ;       // Relocate to bigger space
+    bool empty()  ;       // Return true if size is 0
+
     // Friends
     friend ostream& operator << (ostream& out, KYVector<T> kyVec) {
         for (int i = 0; i < kyVec.size; ++i)

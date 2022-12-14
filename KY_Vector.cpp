@@ -211,3 +211,23 @@ bool KYVector<T>::operator<(const KYVector<T> & kyVector) {
 
     }
 }
+Temp
+void KYVector<T>::resize() {
+    cap *= 2;
+    for (int i = size; i <= cap; ++i) {
+        vec[i] = 0 ;
+    }
+    size *= 2;
+}
+Temp
+bool KYVector<T>::empty() {
+    return !size;
+}
+Temp
+int KYVector<T>::Size() const {
+    return size;
+}
+Temp
+int KYVector<T>::capacity() const {
+    return cap;
+}
