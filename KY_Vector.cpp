@@ -109,3 +109,25 @@ void KYVector<T>::erase(iterator it) {
         cout << "ITERATOR NOT FOUND!\nERROR NO." << x << endl ;
     }
 }
+Temp
+void KYVector<T>::erase(KYVector::iterator it1, KYVector::iterator it2) {
+    try {
+        KYVector<T> other;
+        bool flag = true;
+        if (it1 > it2 || it1 < this->begin() || it2 > this->end())
+            throw 2;
+        for (int i = 0; i < size; ++i) {
+            if ( &vec[i] == it1) flag = false;
+            if (flag) {
+                other.push_back(vec[i]);
+                cout << vec[i] <<endl;
+            }
+            if ( &vec[i] == it2) flag = true;
+        }
+        vec = other.vec;
+        other.vec = nullptr;
+    }
+    catch (int & x ){
+        cout << "NOT VALID INTERVAL!\nERROR NO." << x << endl ;
+    }
+}

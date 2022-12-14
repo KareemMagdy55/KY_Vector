@@ -32,6 +32,7 @@ public:
 
     typedef T* iterator;
     void erase (iterator);
+    void erase (iterator, iterator);
     //iterators
 
     iterator begin() { return &vec[0] ;}
