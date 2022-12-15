@@ -80,8 +80,8 @@ Temp
 T KYVector<T>::pop_back() {
     T lastElement = vec[size-1];
     vec[size-1] = NULL;
-    --size;
-    --cap;
+    size--;
+    cap--;
     return lastElement;
 }
 Temp
