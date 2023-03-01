@@ -24,7 +24,6 @@ Temp
 KYVector<T>::KYVector(const KYVector<T> &anotherVec) {
     size = anotherVec.size;
     cap = anotherVec.cap;
-
     vec = new T[cap];
 
     for (int i = 0; i < size; ++i) {
@@ -38,28 +37,32 @@ KYVector<T>::~KYVector() {
     vec = nullptr;
 }
 Temp
+
 KYVector<T> &KYVector<T>::operator=(const KYVector<T> & anotherVec) {
-    size = anotherVec.size;
-    cap = anotherVec.cap;
-
-    vec = new T[cap];
-
-    for (int i = 0; i < size; ++i) {
-        vec[i] = anotherVec.vec[i];
-    }
-}
-Temp
-KYVector<T> &KYVector<T>::operator=(const KYVector<T> && anotherVec) {
     if ( this != &anotherVec) {
+        delete[] vec;
         size = anotherVec.size;
         cap = anotherVec.cap;
-        vec = anotherVec.vec;
+        vec = new T[cap];
 
-        anotherVec.size = 0 ;
-        anotherVec.cap = 0 ;
+        for (int i = 0; i < size; ++i) {
+            vec[i] = anotherVec.vec[i];
+        }
+    }
+    return *this;
+}
+Temp
+KYVector<T> &KYVector<T>::operator =(const KYVector<T> && anotherVec)   {
+    cout << "\nmove is here\n";
+    if ( this != &anotherVec) {
+        delete[] vec;
+        size = anotherVec.size;
+        cap = anotherVec.cap;
+        vec =  anotherVec.vec;
         delete[] anotherVec.vec;
     }
     return *this ;
+
 }
 Temp
 T &KYVector<T>::operator[](int n ) {
@@ -84,6 +87,7 @@ T KYVector<T>::pop_back() {
     cap--;
     return lastElement;
 }
+// function >> return type
 Temp
 int KYVector<T>::push_back(T n) {
     if ( size + 1 > cap){
@@ -104,8 +108,8 @@ void KYVector<T>::erase(iterator it) {
         }
         if (size == other.size)
             throw 1;
-        vec = other.vec;
-        other.vec = nullptr;
+
+       *this = other;
     }
     catch (int & x ){
         cout << "ITERATOR NOT FOUND!\nERROR NO." << x << endl ;
@@ -122,12 +126,12 @@ void KYVector<T>::erase(KYVector::iterator it1, KYVector::iterator it2) {
             if ( &vec[i] == it1) flag = false;
             if (flag) {
                 other.push_back(vec[i]);
-                cout << vec[i] <<endl;
+//                cout << vec[i] <<endl;
             }
             if ( &vec[i] == it2) flag = true;
         }
-        vec = other.vec;
-        other.vec = nullptr;
+        *this = other;
+
     }
     catch (int & x ){
         cout << "NOT VALID INTERVAL!\nERROR NO." << x << endl ;
@@ -156,8 +160,8 @@ void KYVector<T>::insert(KYVector::iterator it , T n) {
             }
                 other.push_back(vec[i]);
         }
-        vec = other.vec;
-        other.vec = nullptr;
+        *this = other;
+
     }
     catch (int & x ){
        cout << "ITERATOR NOT FOUND!\nERROR NO." << x << endl;
@@ -179,11 +183,17 @@ bool KYVector<T>::operator==(const KYVector<T> & kyVector) {
 }
 Temp
 bool KYVector<T>::operator>(const KYVector<T> & kyVector) {
-    if (*this == kyVector)
-        return false;
+    if ( size > kyVector.size)
+        return true;
 
-    if (size != kyVector.size)
+    if (*this == kyVector) {
         return false;
+    }
+
+    if (size != kyVector.size) {
+        return false;
+    }
+
 
     else {
         for (int i = 0; i < size; ++i) {
@@ -196,11 +206,15 @@ bool KYVector<T>::operator>(const KYVector<T> & kyVector) {
 }
 Temp
 bool KYVector<T>::operator<(const KYVector<T> & kyVector) {
+    if ( size < kyVector.size)
+        return true;
+
     if ( *this == kyVector)
         return false;
 
     if ( size != kyVector.size)
         return false;
+
 
     else {
         for (int i = 0; i < size; ++i) {
@@ -214,10 +228,7 @@ bool KYVector<T>::operator<(const KYVector<T> & kyVector) {
 Temp
 void KYVector<T>::resize() {
     cap *= 2;
-    for (int i = size; i <= cap; ++i) {
-        vec[i] = 0 ;
-    }
-    size *= 2;
+//    size *= 2;
 }
 Temp
 bool KYVector<T>::empty() {
