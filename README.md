@@ -6,6 +6,7 @@ KY_Vector documatation
 This code is a C++ implementation of a dynamic array class called KYVector. It includes methods for creating a vector, copying a vector, destroying a vector, accessing and modifying elements, and comparing vectors. It also includes methods for inserting and erasing elements at specified positions, and for checking if one vector is greater than another.
 
 ================================================
+
 Some specific methods and features of the class are:
 
 •	Constructors: KYVector can be created using an integer parameter, which specifies the initial capacity of the vector, or by passing an array and its size. A copy constructor is also implemented.
